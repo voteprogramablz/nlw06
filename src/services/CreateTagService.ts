@@ -1,22 +1,21 @@
 import { getCustomRepository } from "typeorm";
 import { TagsRepositories } from "../repositories/TagsRepositories";
 
-interface ITagRequest {
-  name: string;
-}
-
 class CreateTagService {
-  async execute({ name }: ITagRequest) {
+  async execute(name: string) {
     const tagsRepositories = getCustomRepository(TagsRepositories);
 
     if (!name) {
-      throw new Error("Insert a name to create a tag");
+      throw new Error("Incorrect name!");
     }
 
-    const tagAlreadyExists = await tagsRepositories.findOne({ name }); // precisa do await pois é uma promise (tem que esperar ir no DB, pesquisar e trazer o resultado);
+    // SELECT * FROM TAGS WHERE NAME = 'name'
+    const tagAlreadyExists = await tagsRepositories.findOne({
+      name,
+    });
 
     if (tagAlreadyExists) {
-      throw new Error("Tag already exists.");
+      throw new Error("Tag already exists!");
     }
 
     const tag = tagsRepositories.create({

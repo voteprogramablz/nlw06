@@ -5,10 +5,9 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from "typeorm";
-
 import { v4 as uuid } from "uuid";
 
-@Entity("users") // nome da tabela do DB que fará referência
+@Entity("users")
 class User {
   @PrimaryColumn()
   readonly id: string;
@@ -22,6 +21,9 @@ class User {
   @Column()
   admin: boolean;
 
+  @Column()
+  password: string;
+
   @CreateDateColumn()
   created_at: Date;
 
@@ -34,7 +36,5 @@ class User {
     }
   }
 }
-
-// Entidade < - > ORM < - > BD (users)
 
 export { User };

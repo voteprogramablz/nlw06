@@ -10,9 +10,8 @@ const app = express();
 
 app.use(express.json());
 
-app.use(router); // Inserindo as rotas no express
+app.use(router);
 
-// Esse app.use só pode ser chamado depois das rotas, pois se ele foi chamado, quer dizer que alguma rota retornou erro, então ele retorna o erro
 app.use(
   (err: Error, request: Request, response: Response, next: NextFunction) => {
     if (err instanceof Error) {
