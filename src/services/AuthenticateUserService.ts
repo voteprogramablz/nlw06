@@ -23,8 +23,6 @@ class AuthenticateUserService {
     }
 
     // verificar se senha está correta
-
-    // 123456 / 783645734-sdhfhsdf7762374234234
     const passwordMatch = await compare(password, user.password);
 
     if (!passwordMatch) {
